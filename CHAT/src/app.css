@@ -123,24 +123,23 @@ h1 {
   cursor: pointer;
 }
 
-.assistente-vocale {
+.invio {
   position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: white;
 }
-
-.img-assistenteVocale {
-  width: 22px;
-  height: 22px;
+.invio:hover {
+  background-color: rgb(248, 246, 244);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

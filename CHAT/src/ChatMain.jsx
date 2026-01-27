@@ -54,16 +54,11 @@ export function ChatMain() {
           />
 
           <button className="detta">
-            <i class="fa-solid fa-microphone  fa-lg"></i>
+            <i class="fa-solid fa-microphone fa-lg"></i>
           </button>
 
-          {/* bottone di invio */}
-          <button className="assistente-vocale" onClick={handleSend}>
-            <img
-              src="/assistenteVocale.png"
-              alt="icon"
-              className="img-assistenteVocale"
-            />
+          <button className="invio" onClick={handleSend}>
+            <i class="fa-solid fa-paper-plane"></i>
           </button>
         </div>
       </div>
