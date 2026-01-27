@@ -12,20 +12,18 @@ export function ChatMain() {
     "Ah, capisco!",
     "Posso suggerirti qualcosa?",
   ];
-
-  //collegato al div vuoto
-  const messagesEndRef = useRef(null);
-
-  //quando le scritte arrivano infondo alla pagina scrolla da solo
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView();
-  }, [messages]);
-
   // Scegli risposta casuale
   function getRandomReply() {
     const randomIndex = Math.floor(Math.random() * botReplies.length);
     return botReplies[randomIndex];
   }
+
+  //collegato al div vuoto
+  const messagesEndRef = useRef(null);
+  //quando le scritte arrivano infondo alla pagina scrolla da solo
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView();
+  }, [messages]);
 
   // Invio messaggio
   function handleSend() {
@@ -34,17 +32,20 @@ export function ChatMain() {
 
     const userMessage = { role: "user", text: input };
 
-    // prende i messaggi prima e aggiunge il nuovo
-    setMessages((prev) => [...prev, userMessage]);
-
     //svuota l'input dopo l'invio
     setInput("");
     setStarted(true);
 
+    const loaderMessage = { role: "bot", text: null, isLoading: true };
+    // prende i messaggi prima e aggiunge il nuovo
+    setMessages((prev) => [...prev, userMessage, loaderMessage]);
+
     setTimeout(() => {
       const botMessage = { role: "bot", text: getRandomReply() };
-      setMessages((prev) => [...prev, botMessage]);
-    }, 4000);
+      setMessages((prev) =>
+        prev.map((msg) => (msg.isLoading ? botMessage : msg)),
+      );
+    }, 1500);
   }
 
   return (
@@ -58,7 +59,7 @@ export function ChatMain() {
               key={index}
               className={msg.role === "user" ? "msg-user" : "msg-bot"}
             >
-              {msg.text}
+              {msg.isLoading ? <div className="loader"></div> : msg.text}
             </div>
           ))}
           {/*div vuoto x lo scroll collegato a useRef */}
