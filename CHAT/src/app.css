@@ -61,13 +61,17 @@ h1 {
 
 .msg-user {
   align-self: flex-end;
-  background-color: rgb(245, 244, 242);
+  background-color: rgb(231, 231, 230);
   padding: 10px 14px;
   border-radius: 16px;
   max-width: 70%;
 }
 .msg-bot {
   align-self: flex-start;
+  background-color: rgb(245, 244, 242);
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 70%;
 }
 
 .input-completo {
@@ -75,7 +79,7 @@ h1 {
   width: 700px;
   display: flex;
   position: sticky;
-  bottom: 20px;
+  top: 20px;
 }
 .aggiungi {
   position: absolute;

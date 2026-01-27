@@ -3,7 +3,7 @@ export function Navbar() {
     <div>
       <select>
         <option className="first-option">Chat VG</option>
-        <option className="first-option">ChatGPT Go</option>
+        <option className="first-option">Premium</option>
       </select>
     </div>
   );
