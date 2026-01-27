@@ -12,11 +12,17 @@ export function ChatMain() {
     "Ah, capisco!",
     "Posso suggerirti qualcosa?",
   ];
-  // Scegli risposta casuale
-  function getRandomReply() {
-    const randomIndex = Math.floor(Math.random() * botReplies.length);
-    return botReplies[randomIndex];
+  function getRandomReply(lista) {
+    const randomIndex = Math.floor(Math.random() * lista.length);
+    return lista[randomIndex];
   }
+
+  const h1Replies = [
+    "Ciao utente",
+    "Allora, ti butti?",
+    "Come posso aiutarti?",
+  ];
+  const [h1Text] = useState(getRandomReply(h1Replies));
 
   //collegato al div vuoto
   const messagesEndRef = useRef(null);
@@ -41,7 +47,7 @@ export function ChatMain() {
     setMessages((prev) => [...prev, userMessage, loaderMessage]);
 
     setTimeout(() => {
-      const botMessage = { role: "bot", text: getRandomReply() };
+      const botMessage = { role: "bot", text: getRandomReply(botReplies) };
       setMessages((prev) =>
         prev.map((msg) => (msg.isLoading ? botMessage : msg)),
       );
@@ -50,7 +56,7 @@ export function ChatMain() {
 
   return (
     <div className="container">
-      {!started && <h1>In cosa possiamo essere utile?</h1>}
+      {!started && <h1>{h1Text}</h1>}
 
       <div className={`chat-wrapper ${started ? "chat-started" : ""}`}>
         <div className="chat-area">
