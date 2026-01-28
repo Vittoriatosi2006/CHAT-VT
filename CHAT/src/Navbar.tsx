@@ -1,4 +1,6 @@
-export function Navbar() {
+import { JSX } from "react";
+
+export function Navbar(): JSX.Element {
   return (
     <div>
       <select>

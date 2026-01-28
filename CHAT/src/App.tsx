@@ -1,9 +1,10 @@
+import { JSX } from "react";
 import "./app.css";
 
 import { ChatMain } from "./ChatMain";
 import { Navbar } from "./Navbar";
 
-function App() {
+function App(): JSX.Element {
   return (
     <div>
       <Navbar />
