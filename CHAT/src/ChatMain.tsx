@@ -10,6 +10,7 @@ export function ChatMain(): JSX.Element {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [started, setStarted] = useState<boolean>(false);
+  const [isBotTyping, setIsBotTyping] = useState<boolean>(false);
 
   const botReplies: string[] = [
     "Ciao! Come posso aiutarti oggi?",
@@ -26,15 +27,17 @@ export function ChatMain(): JSX.Element {
   const h1Replies: string[] = [
     "Ciao utente",
     "Allora, ti butti?",
+    "Da dove iniziamo?",
     "Come posso aiutarti?",
   ];
-  const [h1Text] = useState<string>(() => getRandomReply(h1Replies));
+  //lo useState serve perche senno l'h1 cambierebbe a ogni scritta aggiunta nell'input
+  const [h1Text] = useState(() => getRandomReply(h1Replies));
 
   //collegato al div vuoto
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   //quando le scritte arrivano infondo alla pagina scrolla da solo
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView();
   }, [messages]);
 
   // Invio messaggio
@@ -50,6 +53,7 @@ export function ChatMain(): JSX.Element {
     //svuota l'input dopo l'invio
     setInput("");
     setStarted(true);
+    setIsBotTyping(true);
 
     const loaderMessage: Message = {
       role: "bot",
@@ -68,6 +72,8 @@ export function ChatMain(): JSX.Element {
       setMessages((prev) =>
         prev.map((msg) => (msg.isLoading ? botMessage : msg)),
       );
+
+      setIsBotTyping(false); //il bot ha finito e l'input si può usare di nuovo
     }, 1500);
   }
 
@@ -97,7 +103,8 @@ export function ChatMain(): JSX.Element {
           <input
             className="chat-input"
             type="text"
-            placeholder="Fai una domanda"
+            placeholder={isBotTyping ? "" : "Fai una domanda"}
+            disabled={isBotTyping}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
@@ -107,7 +114,7 @@ export function ChatMain(): JSX.Element {
             <i className="fa-solid fa-microphone fa-lg" />
           </button>
 
-          <button className="invio" onClick={handleSend}>
+          <button className="invio" onClick={handleSend} disabled={isBotTyping}>
             <i className="fa-solid fa-paper-plane" />
           </button>
         </div>
