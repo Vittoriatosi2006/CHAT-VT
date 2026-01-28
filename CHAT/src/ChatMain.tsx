@@ -78,7 +78,7 @@ export function ChatMain(): JSX.Element {
   }
 
   return (
-    <div className="container">
+    <div className="chatMain">
       {!started && <h1>{h1Text}</h1>}
 
       <div className={`chat-wrapper ${started ? "chat-started" : ""}`}>
@@ -104,7 +104,6 @@ export function ChatMain(): JSX.Element {
             className="chat-input"
             type="text"
             placeholder={isBotTyping ? "" : "Fai una domanda"}
-            disabled={isBotTyping}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
