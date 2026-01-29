@@ -101,6 +101,7 @@ export function ChatMain(): JSX.Element {
           </button>
 
           <input
+            disabled={isBotTyping}
             className="chat-input"
             type="text"
             placeholder={isBotTyping ? "" : "Fai una domanda"}
@@ -113,7 +114,7 @@ export function ChatMain(): JSX.Element {
             <i className="fa-solid fa-microphone fa-lg" />
           </button>
 
-          <button className="invio" onClick={handleSend} disabled={isBotTyping}>
+          <button className="invio" onClick={handleSend}>
             <i className="fa-solid fa-paper-plane" />
           </button>
         </div>
