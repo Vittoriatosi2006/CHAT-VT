@@ -42,6 +42,8 @@ export function ChatMain(): JSX.Element {
 
   // Invio messaggio
   function handleSend(): void {
+    //se i bot sta scrivendo, il messaggio  scritto in input non viene inviato
+    if (isBotTyping) return;
     //se il messsaggio è vuoto non viene invaito
     if (input.trim() === "") return;
 
@@ -101,7 +103,6 @@ export function ChatMain(): JSX.Element {
           </button>
 
           <input
-            disabled={isBotTyping}
             className="chat-input"
             type="text"
             placeholder={isBotTyping ? "" : "Fai una domanda"}
@@ -114,7 +115,7 @@ export function ChatMain(): JSX.Element {
             <i className="fa-solid fa-microphone fa-lg" />
           </button>
 
-          <button className="invio" onClick={handleSend}>
+          <button className="invio" onClick={handleSend} disabled={isBotTyping}>
             <i className="fa-solid fa-paper-plane" />
           </button>
         </div>
