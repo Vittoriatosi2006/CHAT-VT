@@ -116,7 +116,14 @@ export function ChatMain(): JSX.Element {
           </button>
 
           <button className="invio" onClick={handleSend} disabled={isBotTyping}>
-            <i className="fa-solid fa-paper-plane" />
+            {isBotTyping ? (
+              <i
+                className="fa-solid fa-spinner fa-spin fa-lg"
+                style={{ color: "#00040a" }}
+              />
+            ) : (
+              <i className="fa-solid fa-paper-plane" />
+            )}
           </button>
         </div>
       </div>
