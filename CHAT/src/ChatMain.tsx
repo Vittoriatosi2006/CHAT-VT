@@ -83,7 +83,7 @@ export function ChatMain(): JSX.Element {
     <div className="chatMain">
       {!started && <h1>{h1Text}</h1>}
 
-      <div className={`chat-wrapper ${started ? "chat-started" : ""}`}>
+      <div className={`chat-wrapper ${started ? "chat-started" : "empty"}`}>
         <div className="chat-area">
           {messages.map((msg, index) => (
             <div
@@ -96,12 +96,7 @@ export function ChatMain(): JSX.Element {
           {/*div vuoto x lo scroll collegato a useRef */}
           <div ref={messagesEndRef} />
         </div>
-
         <div className="input-completo">
-          <button className="aggiungi">
-            <i className="fa-solid fa-plus" />
-          </button>
-
           <input
             className="chat-input"
             type="text"
@@ -110,11 +105,6 @@ export function ChatMain(): JSX.Element {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
           />
-
-          <button className="detta">
-            <i className="fa-solid fa-microphone fa-lg" />
-          </button>
-
           <button className="invio" onClick={handleSend} disabled={isBotTyping}>
             {isBotTyping ? (
               <i

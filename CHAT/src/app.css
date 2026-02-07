@@ -1,4 +1,39 @@
-select {
+:root {
+  --bg-page: #efe9e1;
+  --bg-card: #f7f4ef;
+  --bg-user: #e2c7b7;
+  --primary: #8b5e3c;
+  --primary-hover: #744c2f;
+  --text-main: #2e2e2e;
+  --border-soft: #d6cfc7;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--bg-page);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  color: var(--text-main);
+}
+
+/*Navbar*/
+.bottoni {
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 40px;
+}
+.bottoni a {
+  text-decoration: none;
+}
+
+.chatVG {
+  grid-column: 1;
   border: none;
   height: 40px;
   width: 80px;
@@ -6,152 +41,147 @@ select {
   box-sizing: border-box;
   margin: 0 auto;
   display: block;
+  background-color: transparent;
+  border: 1px solid var(--border-soft);
+  color: var(--primary);
+  font-weight: 700;
+}
+.chatVG:hover {
+  background-color: var(--bg-card);
 }
 
-select:hover {
-  background-color: rgb(245, 244, 242);
+.chat-recenti {
+  grid-column: 2;
+  border: none;
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: block;
+  background-color: transparent;
+  border: 1px solid var(--border-soft);
+  color: var(--primary);
+  font-weight: 700;
+}
+.chat-recenti:hover {
+  background-color: var(--bg-card);
 }
 
-main {
-  display: grid;
-  grid-template-rows: auto auto;
-  gap: 20px;
-}
-
-h1 {
-  text-align: center;
-  font-size: 28px;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  font-weight: 400;
-}
-
+/*Chat*/
 .chatMain {
-  height: 90vh;
-  overflow-y: hidden;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 85vh;
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-page);
+}
+
+.chatMain h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 35px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  pointer-events: none;
 }
 
 .chat-wrapper {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 }
-.chat-started {
-  min-height: 90vh;
-  min-width: 90vw;
-  overflow-x: hidden;
-}
+
 .chat-area {
   display: flex;
-  width: 700px;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0 auto 20px;
   gap: 10px;
-  flex: 1;
   overflow-y: auto;
-  overflow-x: auto;
-  height: 400px;
+  padding: 20px 0;
 }
+
 .chat-area::-webkit-scrollbar {
-  /*x non far vedere la barra di scorrimento*/
   display: none;
 }
 
 .msg-user {
   align-self: flex-end;
-  background-color: rgb(231, 231, 230);
+  background-color: var(--bg-user);
   padding: 10px 14px;
-  border-radius: 16px;
-  max-width: 70%;
+  border-radius: 18px 18px 4px 18px;
+  max-width: 60%;
 }
+
 .msg-bot {
   align-self: flex-start;
-  background-color: rgb(245, 244, 242);
+  background-color: var(--bg-card);
   padding: 10px 14px;
-  border-radius: 16px;
-  max-width: 70%;
+  border-radius: 18px 18px 18px 4px;
+  max-width: 60%;
 }
 
 .input-completo {
-  margin: 0 auto;
-  width: 700px;
   display: flex;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: var(--bg-page);
   position: sticky;
-  top: 20px;
-}
-
-.aggiungi {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border: none;
-  background-color: white;
-}
-.aggiungi:hover {
-  background-color: rgb(248, 246, 244);
-  cursor: pointer;
+  bottom: 0;
 }
 
 .chat-input {
+  flex: 1;
   height: 50px;
-  width: 500vh;
-  padding-left: 50px;
-  padding-right: 20px;
+  padding: 0 20px;
   border-radius: 50px;
-  border: solid 1px rgb(207, 202, 202);
-  box-sizing: border-box;
-}
-
-.detta {
-  position: absolute;
-  right: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 45px;
-  width: 45px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  border-radius: 50%;
-
-  align-items: center;
-  background-color: white;
-}
-.detta:hover {
-  background-color: rgb(248, 246, 244);
-  cursor: pointer;
+  border: 1px solid var(--border-soft);
+  background-color: #fff;
 }
 
 .invio {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 40px;
-  width: 40px;
+  font-size: 20px; /* dimensione icona */
+  line-height: 1; /* elimina spazio verticale */
+  padding: 0;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: none;
+  background-color: var(--primary);
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-}
-.invio:hover {
-  background-color: rgb(248, 246, 244);
   cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    background-color 0.2s ease;
 }
 
-/*invio*/
+.invio:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.invio i {
+  display: block;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+  line-height: 50px;
+}
+
 .loader {
   width: 30px;
   aspect-ratio: 4;
@@ -160,6 +190,7 @@ h1 {
   clip-path: inset(0 100% 0 0);
   animation: l1 1s steps(4) infinite;
 }
+
 @keyframes l1 {
   to {
     clip-path: inset(0 -34% 0 0);
@@ -167,46 +198,17 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-  .container {
-    height: 90vh;
-    width: 768px;
-    overflow-y: hidden;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .chat-area {
-    display: flex;
-    width: 80vw;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 0 auto 20px;
-    gap: 10px;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: auto;
-    height: 400px;
-  }
-  .chat-area::-webkit-scrollbar {
-    /*x non far vedere la barra di scorrimento*/
-    display: none;
-  }
-
-  .chat-input {
-    height: 50px;
-    width: 100vw;
-    padding-left: 50px;
-    padding-right: 20px;
-    border-radius: 50px;
-    border: solid 1px rgb(207, 202, 202);
-    box-sizing: border-box;
-  }
+  .chat-wrapper,
+  .chat-area,
   .input-completo {
-    margin: 0 auto;
-    width: 80vw;
-    display: flex;
-    position: sticky;
-    top: 20px;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  .msg-user,
+  .msg-bot {
+    max-width: 85%;
+  }
+  .chat-input {
+    width: 100%;
   }
 }
