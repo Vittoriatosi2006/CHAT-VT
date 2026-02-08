@@ -45,6 +45,10 @@ body {
   border: 1px solid var(--border-soft);
   color: var(--primary);
   font-weight: 700;
+  animation: rotating 4s linear infinite;
+  position: relative; /* serve per posizionare il bordo */
+  overflow: hidden; /* nasconde ciò che esce */
+  z-index: 1;
 }
 .chatVG:hover {
   background-color: var(--bg-card);
@@ -75,7 +79,7 @@ body {
   height: 85vh;
   width: 100%;
   position: relative;
-  background-color: var(--bg-page);
+  background: transparent;
 }
 
 .chatMain h1 {
@@ -97,6 +101,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
+  background: transparent;
   max-width: 700px;
   margin: 0 auto;
 }
@@ -118,6 +123,7 @@ body {
   background-color: var(--bg-user);
   padding: 10px 14px;
   border-radius: 18px 18px 4px 18px;
+  position: relative;
   max-width: 60%;
 }
 
@@ -126,6 +132,7 @@ body {
   background-color: var(--bg-card);
   padding: 10px 14px;
   border-radius: 18px 18px 18px 4px;
+  position: relative;
   max-width: 60%;
 }
 
@@ -139,6 +146,7 @@ body {
   background-color: var(--bg-page);
   position: sticky;
   bottom: 0;
+  z-index: 2;
 }
 
 .chat-input {
@@ -211,5 +219,224 @@ body {
   }
   .chat-input {
     width: 100%;
+  }
+}
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.bots-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0; /* dietro tutto il contenuto */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bot {
+  position: absolute;
+  width: clamp(16px, 2vw, 26px);
+  height: clamp(16px, 2vw, 26px);
+  background: rgba(139, 94, 60, 0.2); /* più chiaro */
+  border-radius: 6px;
+  opacity: 0.25; /* leggermente più trasparente */
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* occhi robotici */
+.bot .eye {
+  position: absolute;
+  top: 25%;
+  width: 20%;
+  height: 20%;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.bot .eye.left {
+  left: 20%;
+}
+.bot .eye.right {
+  right: 20%;
+}
+
+/* antenne */
+.bot::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: rgba(139, 94, 60, 0.7);
+  border-radius: 2px;
+}
+
+/* corpo piccolo (optional, linea sotto la testa) */
+.bot::before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 4px;
+  background: rgba(139, 94, 60, 0.5);
+  border-radius: 2px;
+}
+
+/* Keyframes diversi per movimento casuale */
+@keyframes float1 {
+  0% {
+    transform: translate(0vw, 0vh);
+  }
+  25% {
+    transform: translate(5vw, -5vh);
+  }
+  50% {
+    transform: translate(-5vw, 5vh);
+  }
+  75% {
+    transform: translate(3vw, 3vh);
+  }
+  100% {
+    transform: translate(0vw, 0vh);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translate(0vw, 0vh);
+  }
+  25% {
+    transform: translate(-4vw, 6vh);
+  }
+  50% {
+    transform: translate(6vw, -4vh);
+  }
+  75% {
+    transform: translate(-3vw, 2vh);
+  }
+  100% {
+    transform: translate(0vw, 0vh);
+  }
+}
+
+@keyframes float3 {
+  0% {
+    transform: translate(0vw, 0vh);
+  }
+  25% {
+    transform: translate(3vw, 3vh);
+  }
+  50% {
+    transform: translate(-3vw, -5vh);
+  }
+  75% {
+    transform: translate(5vw, -2vh);
+  }
+  100% {
+    transform: translate(0vw, 0vh);
+  }
+}
+
+/* assegno keyframes diversi ai bot */
+.bot-0 {
+  animation-name: float1;
+  top: 20%;
+  left: 10%;
+  animation-duration: 28s;
+}
+.bot-1 {
+  animation-name: float2;
+  top: 35%;
+  left: 25%;
+  animation-duration: 30s;
+}
+.bot-2 {
+  animation-name: float3;
+  top: 50%;
+  left: 40%;
+  animation-duration: 32s;
+}
+.bot-0:nth-child(3n + 1) {
+  animation-name: float1;
+}
+.bot-1:nth-child(3n + 2) {
+  animation-name: float2;
+}
+.bot-2:nth-child(3n) {
+  animation-name: float3;
+}
+
+/* top e left casuali per ogni bot */
+.bot:nth-child(1) {
+  top: 10%;
+  left: 5%;
+}
+.bot:nth-child(2) {
+  top: 20%;
+  left: 15%;
+}
+.bot:nth-child(3) {
+  top: 30%;
+  left: 25%;
+}
+.bot:nth-child(4) {
+  top: 40%;
+  left: 35%;
+}
+.bot:nth-child(5) {
+  top: 50%;
+  left: 45%;
+}
+.bot:nth-child(6) {
+  top: 60%;
+  left: 55%;
+}
+.bot:nth-child(7) {
+  top: 30%;
+  left: 65%;
+}
+.bot:nth-child(8) {
+  top: 20%;
+  left: 75%;
+}
+.bot:nth-child(9) {
+  top: 10%;
+  left: 85%;
+}
+.bot:nth-child(10) {
+  top: 60%;
+  left: 15%;
+}
+.bot:nth-child(11) {
+  top: 70%;
+  left: 35%;
+}
+.bot:nth-child(12) {
+  top: 80%;
+  left: 50%;
+}
+.bot:nth-child(13) {
+  top: 65%;
+  left: 70%;
+}
+.bot:nth-child(14) {
+  top: 40%;
+  left: 80%;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .bot {
+    opacity: 0.25;
+    animation-duration: 35s;
+  }
+  .bot:nth-child(n + 10) {
+    display: none; /* meno bot su mobile */
   }
 }

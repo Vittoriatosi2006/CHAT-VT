@@ -5,10 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChatMain } from "./ChatMain";
 import { Navbar } from "./Navbar";
 import { ChatRecenti } from "./ChatRecenti";
+import FloatingBots from "./FloatingBots";
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
+      <FloatingBots />
       <div className="container">
         <Navbar />
         <main>
