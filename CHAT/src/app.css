@@ -45,10 +45,6 @@ body {
   border: 1px solid var(--border-soft);
   color: var(--primary);
   font-weight: 700;
-  animation: rotating 4s linear infinite;
-  position: relative; /* serve per posizionare il bordo */
-  overflow: hidden; /* nasconde ciò che esce */
-  z-index: 1;
 }
 .chatVG:hover {
   background-color: var(--bg-card);
@@ -221,15 +217,12 @@ body {
     width: 100%;
   }
 }
-.container {
-  position: relative;
-  z-index: 1;
-}
 
+/*ROBOTTINI*/
 .bots-bg {
   position: fixed;
   inset: 0;
-  z-index: 0; /* dietro tutto il contenuto */
+  z-index: 0;
   pointer-events: none;
   overflow: hidden;
 }
@@ -238,14 +231,13 @@ body {
   position: absolute;
   width: clamp(16px, 2vw, 26px);
   height: clamp(16px, 2vw, 26px);
-  background: rgba(139, 94, 60, 0.2); /* più chiaro */
+  background: rgba(139, 94, 60, 0.2);
   border-radius: 6px;
-  opacity: 0.25; /* leggermente più trasparente */
+  opacity: 0.25;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
 
-/* occhi robotici */
 .bot .eye {
   position: absolute;
   top: 25%;
@@ -275,7 +267,6 @@ body {
   border-radius: 2px;
 }
 
-/* corpo piccolo (optional, linea sotto la testa) */
 .bot::before {
   content: "";
   position: absolute;
@@ -288,7 +279,6 @@ body {
   border-radius: 2px;
 }
 
-/* Keyframes diversi per movimento casuale */
 @keyframes float1 {
   0% {
     transform: translate(0vw, 0vh);
@@ -343,7 +333,6 @@ body {
   }
 }
 
-/* assegno keyframes diversi ai bot */
 .bot-0 {
   animation-name: float1;
   top: 20%;
@@ -362,6 +351,7 @@ body {
   left: 40%;
   animation-duration: 32s;
 }
+
 .bot-0:nth-child(3n + 1) {
   animation-name: float1;
 }
@@ -372,7 +362,6 @@ body {
   animation-name: float3;
 }
 
-/* top e left casuali per ogni bot */
 .bot:nth-child(1) {
   top: 10%;
   left: 5%;
@@ -428,15 +417,4 @@ body {
 .bot:nth-child(14) {
   top: 40%;
   left: 80%;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .bot {
-    opacity: 0.25;
-    animation-duration: 35s;
-  }
-  .bot:nth-child(n + 10) {
-    display: none; /* meno bot su mobile */
-  }
 }
