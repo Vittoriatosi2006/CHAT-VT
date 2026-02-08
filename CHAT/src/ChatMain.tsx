@@ -25,10 +25,10 @@ export function ChatMain(): JSX.Element {
   }
 
   const h1Replies: string[] = [
-    "Ciao utente",
-    "Allora, ti butti?",
-    "Da dove iniziamo?",
-    "Come posso aiutarti?",
+    "Ciao! 👋😊",
+    "Allora, ti butti? 🚀😏",
+    "Da dove iniziamo? 🧭✨",
+    "Come posso aiutarti? 🤝💡",
   ];
   //lo useState serve perche senno l'h1 cambierebbe a ogni scritta aggiunta nell'input
   const [h1Text] = useState(() => getRandomReply(h1Replies));
