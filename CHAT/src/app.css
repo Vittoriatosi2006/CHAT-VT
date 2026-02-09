@@ -211,6 +211,90 @@ body {
   }
 }
 
+/*CHAT RECENTI*/
+.wrapperChatRecenti {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  padding: 50px 60px 0 60px;
+  box-sizing: border-box;
+}
+
+.chatRecenti {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  flex: 1 1 auto;
+  min-width: 0;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+
+.conversazione {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: min(80vw, 160px);
+  min-height: 150px;
+  padding: 15px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 12px;
+  background: rgba(139, 94, 60, 0.2);
+  box-sizing: border-box;
+}
+
+.chatRecenti::-webkit-scrollbar {
+  display: none;
+}
+
+.chatRecenti h1 {
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--primary);
+  margin: 0 0 10px 0;
+  flex-shrink: 0;
+}
+
+.chatRecenti span {
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  font-size: 14px;
+  color: var(--secondary);
+  flex-grow: 1;
+}
+
+.scroll-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  margin: 0 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(139, 94, 60, 0.5);
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.scroll-btn.left {
+  left: 3px;
+}
+
+.scroll-btn.right {
+  right: 3px;
+}
+
 /*ROBOTTINI*/
 .bots-bg {
   position: fixed;
@@ -412,83 +496,6 @@ body {
   left: 80%;
 }
 
-/*CHAT RECENTI*/
-.wrapperChatRecenti {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 0 60px;
-  box-sizing: border-box;
-  position: relative;
-  padding: 50px 60px 0 60px;
-  box-sizing: border-box;
-}
-
-.chatRecenti {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  flex: 1 1 auto;
-  min-width: 0;
-  scrollbar-width: none;
-}
-
-.chatRecenti::-webkit-scrollbar {
-  display: none;
-}
-
-.chatRecenti::-webkit-scrollbar {
-  display: none;
-}
-
-.chatRecenti h1 {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--primary);
-}
-
-.chatRecenti span {
-  font-size: 14px;
-  color: var(--secondary);
-}
-
-.conversazione {
-  flex-shrink: 0;
-  min-width: 150px;
-  padding: 15px;
-  height: 150px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
-  background: rgba(139, 94, 60, 0.2);
-}
-
-.scroll-btn {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  margin: 0 10px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(139, 94, 60, 0.5);
-  color: white;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.scroll-btn.left {
-  left: 10px;
-}
-
-.scroll-btn.right {
-  right: 10px;
-}
-
 @media screen and (max-width: 768px) {
   .chat-wrapper,
   .chat-area,
@@ -507,7 +514,7 @@ body {
 
 @media (max-width: 500px) {
   .wrapperChatRecenti {
-    padding: 0 10px;
+    padding: 50px 60px 0 60px;
   }
 
   .scroll-btn {
@@ -518,8 +525,8 @@ body {
   }
 
   .conversazione {
-    min-width: 120px;
-    height: 120px;
+    min-width: unset;
     padding: 10px;
+    max-width: 140px;
   }
 }
