@@ -19,10 +19,6 @@ export function ChatMain(): JSX.Element {
     "Ah, capisco!",
     "Posso suggerirti qualcosa?",
   ];
-  function getRandomReply(lista: string[]): string {
-    const randomIndex = Math.floor(Math.random() * lista.length);
-    return lista[randomIndex];
-  }
 
   const h1Replies: string[] = [
     "Ciao! 👋😊",
@@ -30,6 +26,10 @@ export function ChatMain(): JSX.Element {
     "Da dove iniziamo? 🧭✨",
     "Come posso aiutarti? 🤝💡",
   ];
+  function getRandomReply(lista: string[]): string {
+    const randomIndex = Math.floor(Math.random() * lista.length);
+    return lista[randomIndex];
+  }
   //lo useState serve perche senno l'h1 cambierebbe a ogni scritta aggiunta nell'input
   const [h1Text] = useState(() => getRandomReply(h1Replies));
 
@@ -40,11 +40,46 @@ export function ChatMain(): JSX.Element {
     messagesEndRef.current?.scrollIntoView();
   }, [messages]);
 
-  // Invio messaggio
-  function handleSend(): void {
-    //se i bot sta scrivendo, il messaggio  scritto in input non viene inviato
+  // function handleSend(): void {
+  //   //se i bot sta scrivendo, il messaggio  scritto in input non viene inviato
+  //   if (isBotTyping) return;
+  //   //se il messsaggio è vuoto non viene invaito
+  //   if (input.trim() === "") return;
+
+  //   const userMessage: Message = {
+  //     role: "user",
+  //     text: input,
+  //   };
+
+  //   //svuota l'input dopo l'invio
+  //   setInput("");
+  //   setStarted(true);
+  //   setIsBotTyping(true);
+
+  //   const loaderMessage: Message = {
+  //     role: "bot",
+  //     text: null,
+  //     isLoading: true,
+  //   };
+  //   // prende i messaggi prima e aggiunge il nuovo
+  //   setMessages((prev) => [...prev, userMessage, loaderMessage]);
+
+  //   setTimeout(() => {
+  //     const botMessage: Message = {
+  //       role: "bot",
+  //       text: getRandomReply(botReplies),
+  //     };
+
+  //     setMessages((prev) =>
+  //       prev.map((msg) => (msg.isLoading ? botMessage : msg)),
+  //     );
+
+  //     setIsBotTyping(false); //il bot ha finito e l'input si può usare di nuovo
+  //   }, 1500);
+  // }
+
+  async function handleSend(): Promise<void> {
     if (isBotTyping) return;
-    //se il messsaggio è vuoto non viene invaito
     if (input.trim() === "") return;
 
     const userMessage: Message = {
@@ -52,31 +87,37 @@ export function ChatMain(): JSX.Element {
       text: input,
     };
 
-    //svuota l'input dopo l'invio
     setInput("");
     setStarted(true);
     setIsBotTyping(true);
 
-    const loaderMessage: Message = {
-      role: "bot",
-      text: null,
-      isLoading: true,
-    };
-    // prende i messaggi prima e aggiunge il nuovo
-    setMessages((prev) => [...prev, userMessage, loaderMessage]);
+    setMessages((prev) => [...prev, userMessage]);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("http://localhost:3000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: input }), //invia l'input dell'utente dal server (da oggetto js a testo json)
+      });
+
+      const data = await response.json(); //ricevo la risposta del bot dal server (da testo json a oggetto js)
+
+      const botMessage: Message = {
+        role: "bot",
+        text: data.reply, //risposta del bot dal server
+      };
+      setMessages((prev) => [...prev, botMessage]);
+      setIsBotTyping(false);
+    } catch (error) {
       const botMessage: Message = {
         role: "bot",
         text: getRandomReply(botReplies),
       };
-
-      setMessages((prev) =>
-        prev.map((msg) => (msg.isLoading ? botMessage : msg)),
-      );
-
-      setIsBotTyping(false); //il bot ha finito e l'input si può usare di nuovo
-    }, 1500);
+      setMessages((prev) => [...prev, botMessage]);
+      setIsBotTyping(false);
+    }
   }
 
   return (
@@ -107,10 +148,7 @@ export function ChatMain(): JSX.Element {
           />
           <button className="invio" onClick={handleSend} disabled={isBotTyping}>
             {isBotTyping ? (
-              <i
-                className="fa-solid fa-spinner fa-spin fa-lg"
-                style={{ color: "#00040a" }}
-              />
+              <i className="fa-solid fa-spinner fa-spin fa-lg" />
             ) : (
               <i className="fa-solid fa-paper-plane" />
             )}

@@ -1,4 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+
+type Conversazione = {
+  giorno: string;
+  testo: string;
+};
 
 export function ChatRecenti() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -17,7 +22,16 @@ export function ChatRecenti() {
     });
   };
 
-  const conversazioni = [
+  const [conversazioni, setConversazioni] = useState<Conversazione[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/conversazioni")
+      .then((res) => res.json())
+      .then((data) => setConversazioni(data))
+      .catch(() => setConversazioni(conversazioniMockate));
+  }, []);
+
+  const conversazioniMockate = [
     { giorno: "OGGI", testo: "Ciao! Come sta andando la tua giornata?" },
     {
       giorno: "1 GIORNO FA",
@@ -47,6 +61,8 @@ export function ChatRecenti() {
       </button>
 
       <div className="chatRecenti" ref={scrollRef}>
+        {" "}
+        //x lo scroll orizzontale
         {conversazioni.map((giorno, index) => (
           <div className="conversazione" key={index}>
             <h1>{giorno.giorno}</h1>
