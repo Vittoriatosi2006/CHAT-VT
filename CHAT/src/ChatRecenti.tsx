@@ -60,9 +60,8 @@ export function ChatRecenti() {
         <i className="fa-solid fa-chevron-left"></i>
       </button>
 
+      {/* x lo scroll orizzontale */}
       <div className="chatRecenti" ref={scrollRef}>
-        {" "}
-        //x lo scroll orizzontale
         {conversazioni.map((giorno, index) => (
           <div className="conversazione" key={index}>
             <h1>{giorno.giorno}</h1>
