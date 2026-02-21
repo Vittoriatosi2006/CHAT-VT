@@ -23,13 +23,21 @@ body {
 
 /*Navbar*/
 .bottoni {
-  padding-top: calc(40px + env(safe-area-inset-top));
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  padding-top: calc(20px + env(safe-area-inset-top));
   padding-bottom: 20px;
+
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
   gap: 40px;
+
+  background-color: var(--bg-page); /* IMPORTANTISSIMO */
 }
+
 .bottoni a {
   text-decoration: none;
 }
