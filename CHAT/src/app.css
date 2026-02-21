@@ -29,6 +29,7 @@ body {
   grid-template-columns: auto auto;
   justify-content: center;
   gap: 40px;
+  position: fixed;
 }
 .bottoni a {
   text-decoration: none;
