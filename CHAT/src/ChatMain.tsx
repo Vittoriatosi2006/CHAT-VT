@@ -111,12 +111,15 @@ export function ChatMain(): JSX.Element {
       setMessages((prev) => [...prev, botMessage]);
       setIsBotTyping(false);
     } catch (error) {
-      const botMessage: Message = {
-        role: "bot",
-        text: getRandomReply(botReplies),
-      };
-      setMessages((prev) => [...prev, botMessage]);
-      setIsBotTyping(false);
+      setTimeout(() => {
+        const botMessage: Message = {
+          role: "bot",
+          text: getRandomReply(botReplies),
+        };
+
+        setMessages((prev) => [...prev, botMessage]);
+        setIsBotTyping(false);
+      }, 1500);
     }
   }
 
